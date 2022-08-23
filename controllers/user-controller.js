@@ -42,7 +42,15 @@ const userController = {
     User.findOneAndUpdate ({_id: req.params.userId}, {$addToSet:{friends:req.params.friendId}}, {new:true})
     .then(dbUserData => res.json(dbUserData))
         .catch(err => res.json(err));
-   }
+   },
+
+// delete user
+deleteUser({ params }, res) {
+  User.findOneAndDelete({ _id: params.id })
+    .then(dbUserData => res.json(dbUserData))
+    .catch(err => res.json(err));
+}
+
 }
   
   module.exports = userController;
